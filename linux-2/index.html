@@ -22,7 +22,7 @@
     <meta name="description" content="赖赖魔的爬坑记，涉及PHP、Linux、Mysql、Docker等等等......">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>一个假的程序员</title>
+    <title>Linux定时任务 · 一个假的程序员</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -218,12 +218,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >BugMaker.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Linux定时任务</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>BugMaker.</a>
 </header>
@@ -235,24 +246,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Linux定时任务
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">289</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2016/04/15</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -353,41 +414,69 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/linux-2/" >
-            
-                <span>Linux定时任务</span>
-        </a>
-        <div class="abstract-content">
-            <p>最近在做一个SHELL脚本，要求每月1号执行一次。</p>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>最近在做一个SHELL脚本，要求每月1号执行一次。</p>
 <p>不管是SHELL脚本，还是定时任务，都是刚接触。今天先记录下定时任务的解决过程，shell脚本的总结等测试无误后写出来。</p>
-<p>root以及其他用户可以使用 crontab -e 命令添加定时任务
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
-    
-</div>
-            
-        </div>
+<p>root以及其他用户可以使用 crontab -e 命令添加定时任务<a id="more"></a></p>
+<p>crontab -e 命令会使用vi打开一个临时文件，保存后会以当前用户为文件名存放在/var/spool/cron/文件夹下</p>
+<p>例如我以 test 用户登录系统</p>
+<p>crontab -e<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#每分钟执行一次test.sh脚本</span><br><span class="line">*/1 * * * * /home/test/test.sh</span><br><span class="line"></span><br><span class="line">#每月1号凌晨6点执行一次test.sh脚本</span><br><span class="line">0 6 1 * *  /home/test/test.sh</span><br></pre></td></tr></table></figure></p>
+<p>保存后会在/var/spool/cron/文件夹下生成test文件</p>
+<p>等了好几分钟，test的脚本日志也没内容         tail -n 5 /var/log/cron  查看定时服务脚本文件显示已执行</p>
+<p>问题出在脚本无执行权限   chmod 755 /home/test/test.sh</p>
+<p>可以正常执行了。</p>
+<p>观察log文件发现报错sqlplus: command not found</p>
+<p>添加当前用户的环境变量最便捷有效</p>
+<p>source /home/test/.bash_profile  问题解决</p>
+
     </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/linux-3/" title= "VIM操作技巧">
+                    <div class="nextTitle">VIM操作技巧</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "w5pdG7ux3rib6XCOJhnSGrRA-gzGzoHsz",
+        appKey: "M4523OJtfLQ67qgTNTFFCFqD",
+        placeholder: "欢迎您留言指导!",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -463,6 +552,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -689,6 +796,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

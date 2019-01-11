@@ -22,7 +22,7 @@
     <meta name="description" content="赖赖魔的爬坑记，涉及PHP、Linux、Mysql、Docker等等等......">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>一个假的程序员</title>
+    <title>docker指南 · 一个假的程序员</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -218,12 +218,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >BugMaker.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">docker指南</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>BugMaker.</a>
 </header>
@@ -235,24 +246,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            docker指南
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.2k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/10/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -353,41 +414,79 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/linux-2/" >
-            
-                <span>Linux定时任务</span>
-        </a>
-        <div class="abstract-content">
-            <p>最近在做一个SHELL脚本，要求每月1号执行一次。</p>
-<p>不管是SHELL脚本，还是定时任务，都是刚接触。今天先记录下定时任务的解决过程，shell脚本的总结等测试无误后写出来。</p>
-<p>root以及其他用户可以使用 crontab -e 命令添加定时任务
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/04/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>使用容器已经半年多了，这期间完成了公司业务的容器化，遇到问题的时候习惯了使用搜索引擎，有很多时候搜的是同一个问题，总是有一种健忘的感觉，这使我非常恼火，现在把自己遇到的问题整理出来，下次查找就方便了……<a id="more"></a></p>
+<h2 id="何为容器"><a href="#何为容器" class="headerlink" title="何为容器"></a>何为容器</h2><blockquote>
+<p>容器（Container）是一种轻量级、可移植、自包含的软件打包技术，使应用程序可以在几乎任何地方以相同的方式运行。</p>
+</blockquote>
+<p>我们常说的docker是一种容器引擎，不过容器引擎不单单只有docker，还有CoreOS的rkt，只不过docker的普及率高而已。<br><img style="border: none" src="/img/docker1.jpg"><br>Container这个单词有集装箱和容器两个意思，docker的logo很形象—就是一堆集装箱。</p>
+<h2 id="docker的基本概念"><a href="#docker的基本概念" class="headerlink" title="docker的基本概念"></a>docker的基本概念</h2><h3 id="镜像（Image）"><a href="#镜像（Image）" class="headerlink" title="镜像（Image）"></a><strong><em>镜像（Image）</em></strong></h3><p>Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。<br>镜像具有分层存储的特征，这还使得镜像的复用、定制变的更为容易。甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。<br>镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么镜像构建透明性的问题、版本管理问题就都会解决。这个脚本就是 Dockerfile。</p>
+<h3 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a><strong><em>容器（Container）</em></strong></h3><p>镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。<br>按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p>
+<h3 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a><strong><em>仓库（Repository）</em></strong></h3><p>镜像构建完成后，可以很容易的在当前宿主机上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。<br>一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p>
+<h2 id="docker的优点"><a href="#docker的优点" class="headerlink" title="docker的优点"></a>docker的优点</h2><h3 id="环境一致性"><a href="#环境一致性" class="headerlink" title="环境一致性"></a><strong><em>环境一致性</em></strong></h3><p>能够可靠一致地部署应用程序而不必考虑环境的情况。这样一来，不再需要人工对每台服务器进行配置，一次部署，随处可用。</p>
+<h3 id="专注于生产力"><a href="#专注于生产力" class="headerlink" title="专注于生产力"></a><strong><em>专注于生产力</em></strong></h3><p>让开发人员从环境问题的坑中解脱出来，专注于开发，提高了生产力。</p>
+<h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a><strong><em>版本控制</em></strong></h3><p>借助容器，您可以跟踪应用程序代码的版本及其依赖关系。Docker 容器映像包含一个清单文件 (Dockerfile)，使用此文件可以轻松维护和跟踪容器的版本、检查不同版本间的差异以及回滚到之前的版本。</p>
+<h2 id="docker的基本操作"><a href="#docker的基本操作" class="headerlink" title="docker的基本操作"></a>docker的基本操作</h2><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a><strong><em>启动容器</em></strong></h3><p>启动容器有两种方式，一种是基于镜像新建一个容器并启动，另外一个是将在终止状态（stopped）的容器重新启动。</p>
+<h3 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a><strong><em>停止容器</em></strong></h3><h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a><strong><em>删除容器</em></strong></h3><h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a><strong><em>进入容器</em></strong></h3><h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a><strong><em>查看容器</em></strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@free:~# docker run -d --name www -p 8080:80  nginx</span><br><span class="line">dd3afcf8b607ab0e1e99d3d0dd924e52d5ac79db6b16464b3d6fea18c4fdf61c</span><br><span class="line">root@free:~# docker ps</span><br></pre></td></tr></table></figure>
+<p>进入容器内部</p>
+<blockquote>
+<p>root@free:~# docker exec -it www /bin/bash</p>
+</blockquote>
+<p>有一个奇葩的需求，我需要经常使用一个安装了wget和vi的容器，先安装</p>
+<blockquote>
+<p>root@dd3afcf8b607:/# apt-get update<br>root@dd3afcf8b607:/# apt-get install wget<br>root@dd3afcf8b607:/# apt-get install vim</p>
+</blockquote>
+<p>root@free:~# docker login<br>提交一个存在的容器<br>root@free:~# docker ps<br>CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                  NAMES<br>dd3afcf8b607        nginx                 “nginx -g ‘daemon …”   12 minutes ago      Up 12 minutes       0.0.0.0:8080-&gt;80/tcp   www<br>668c75b412a8        nginx                 “nginx -g ‘daemon …”   4 months ago        Up 2 months         0.0.0.0:80-&gt;80/tcp     nginx<br>5b6e03f039a3        523613/apache-php56   “docker-php-entryp…”   4 months ago        Up 3 months         80/tcp                 khgroup<br>root@free:~# docker commit dd3afcf8b607 523613/write-nginx<br>sha256:4fa177cfd6764f8778a35791d0b7f9dd1045a5d8dbb09c548955fe0484c10810<br>root@free:~# docker  push 523613/write-nginx<br>The push refers to a repository [docker.io/523613/write-nginx]<br>24803c7db14e: Pushed<br>3ff93588120e: Mounted from library/nginx<br>24ee0a3fd4b9: Mounted from library/nginx<br>d626a8ad97a1: Mounted from 523613/php71<br>latest: digest: sha256:524fad30b39215ded86c76765acdd59e583b860aabfe616a749d982f91929925 size: 1160</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://yeasy.gitbooks.io/docker_practice/content/" target="_blank" rel="noopener">https://yeasy.gitbooks.io/docker_practice/content/</a><br><a href="https://amazonaws-china.com/cn/what-are-containers/" target="_blank" rel="noopener">https://amazonaws-china.com/cn/what-are-containers/</a></p>
+
     </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/linux-4/" title= "VirtualBox 扩容">
+                    <div class="prevTitle">VirtualBox 扩容</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "w5pdG7ux3rib6XCOJhnSGrRA-gzGzoHsz",
+        appKey: "M4523OJtfLQ67qgTNTFFCFqD",
+        placeholder: "欢迎您留言指导!",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -463,6 +562,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#何为容器"><span class="toc-number">1.</span> <span class="toc-text">何为容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker的基本概念"><span class="toc-number">2.</span> <span class="toc-text">docker的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#镜像（Image）"><span class="toc-number">2.1.</span> <span class="toc-text">镜像（Image）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器（Container）"><span class="toc-number">2.2.</span> <span class="toc-text">容器（Container）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仓库（Repository）"><span class="toc-number">2.3.</span> <span class="toc-text">仓库（Repository）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker的优点"><span class="toc-number">3.</span> <span class="toc-text">docker的优点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境一致性"><span class="toc-number">3.1.</span> <span class="toc-text">环境一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专注于生产力"><span class="toc-number">3.2.</span> <span class="toc-text">专注于生产力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制"><span class="toc-number">3.3.</span> <span class="toc-text">版本控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker的基本操作"><span class="toc-number">4.</span> <span class="toc-text">docker的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动容器"><span class="toc-number">4.1.</span> <span class="toc-text">启动容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#停止容器"><span class="toc-number">4.2.</span> <span class="toc-text">停止容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除容器"><span class="toc-number">4.3.</span> <span class="toc-text">删除容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进入容器"><span class="toc-number">4.4.</span> <span class="toc-text">进入容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看容器"><span class="toc-number">4.5.</span> <span class="toc-text">查看容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -689,6 +806,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
